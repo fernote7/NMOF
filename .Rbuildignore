@@ -9,3 +9,5 @@ dev
 dev/
 reports
 reports/
+^.*\.Rproj$
+^\.Rproj\.user$

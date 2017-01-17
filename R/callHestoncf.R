@@ -63,3 +63,10 @@ callHestoncf <- function(S, X, tau, r, q, v0, vT, rho, k, sigma,
     }
     result
 }
+
+S <- 100; X <- 100; tau <- 1; r <- 0.02; q <- 0.08;
+v0 <- 0.2^2; vT <- 0.2^2            ## variance, not volatility
+rho <- -0.3; k <- 0.2; sigma <- 0.3 ## stoch. vol: Heston/Bates
+
+callHestoncf(S, X, tau, r, q, v0, vT, rho, k, sigma,
+                         implVol = FALSE)
