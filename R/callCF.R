@@ -53,6 +53,23 @@ cfHeston <- function(om, S, tau, r, q, v0, vT, rho, k, sigma) {
     exp(cf1 + cf2 + cf3)
 }
 
+
+cfHeston2 <- function(om, S, tau, r, q, v0, vT, rho, k, sigma) {
+    if (sigma < 1e-8)
+        sigma <- 1e-8
+    d <- sqrt((rho * sigma * 1i * om - k)^2 - sigma^2 *
+                  (1i * om - om ^ 2))
+    g <- (k - rho * sigma * 1i * om - d) /
+        (k - rho * sigma * 1i * om + d)
+    cf1 <- 1i * om * (log(S) + (r - q) * tau)
+    cf2 <- vT*k/(sigma^2)*((k - rho * sigma * 1i * om - d) *
+                               tau - 2 * log((1 - g * exp(-d * tau)) / (1 - g)))
+    cf3 <- v0 / sigma^2 * (k - rho * sigma * 1i * om - d) *
+        (1 - exp(-d * tau)) / (1 - g * exp(-d * tau))
+    exp(cf1 + cf2 + cf3)
+}
+
+
 cfBSM <- function(om, S, tau, r, q, v)
     exp(1i * om * log(S) + 1i * tau * (r - q) * om -
             0.5 * tau * v * (1i * om + om ^ 2))
